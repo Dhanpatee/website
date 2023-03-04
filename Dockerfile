@@ -1,8 +1,9 @@
-FROM ubuntu 
-RUN apt update 
-RUN apt install –y apache2 
-RUN apt install –y apache2-utils 
-RUN apt clean 
-EXPOSE 80
-ADD . /var/www/html
-CMD [“apache2ctl”, “-D”, “FOREGROUND”]
+FROM nginx
+
+RUN apt-get update && apt-get upgrade -y
+
+ADD .  /usr/share/nginx/html
+
+EXPOSE 8081
+
+CMD ["nginx", "-g", "daemon off;"]
